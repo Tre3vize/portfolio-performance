@@ -2,7 +2,7 @@ name: Esegui Notebook Colab
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Esegue il flusso di lavoro ogni giorno a mezzanotte (UTC)
+    - cron: '35 23 * * *'  # Esegue il flusso di lavoro ogni giorno a mezzanotte (UTC)
   workflow_dispatch:  # Permette di eseguire manualmente il flusso di lavoro
 
 jobs:
