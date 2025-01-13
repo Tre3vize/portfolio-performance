@@ -1,1 +1,32 @@
+name: Esegui Notebook Colab
 
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Esegue il flusso di lavoro ogni giorno a mezzanotte (UTC)
+  workflow_dispatch:  # Permette di eseguire manualmente il flusso di lavoro
+
+jobs:
+  run_notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Imposta Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Installa dipendenze
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt  # Se hai un file requirements.txt
+
+    - name: Esegui notebook Colab
+      run: |
+        # Carica il notebook da GitHub
+        curl -LO https://raw.githubusercontent.com/tuo-utente/tuo-repository/main/tuo-notebook.ipynb
+
+        # Usa nbconvert per eseguire il notebook
+        jupyter nbconvert --execute --inplace tuo-notebook.ipynb
